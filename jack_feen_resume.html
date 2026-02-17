@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack Feen – Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #1a1a1a;
+      --muted:  #6b6b6b;
+      --rule:   #d8d0c7;
+      --cream:  #f7f4ef;
+      --accent: #c4622d;
+      --paper:  #fffdf9;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── top bar ── */
+    header {
+      width: 100%;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: slideDown .5s ease both;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      letter-spacing: .12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .dl-btn:hover { background: var(--accent); transform: translateY(-1px); }
+    .dl-btn svg { flex-shrink: 0; }
+
+    /* ── main container ── */
+    main {
+      width: 100%;
+      max-width: 820px;
+      padding: 60px 24px 80px;
+      animation: fadeUp .6s .1s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── name block ── */
+    .name-block {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+    .name-block h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 7vw, 58px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -.01em;
+    }
+    .name-block .tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .14em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* contact row */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      margin: 22px 0 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .contact-row a, .contact-row span {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: color .15s;
+    }
+    .contact-row a:hover { color: var(--accent); }
+
+    /* ── section ── */
+    section { margin-bottom: 40px; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    /* entry */
+    .entry { margin-bottom: 22px; }
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .entry-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .entry-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      letter-spacing: .06em;
+    }
+    .entry-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 3px 0 8px;
+    }
+    .entry ul {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .entry li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* honors row */
+    .honors-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .honor-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .06em;
+      border: 1px solid var(--rule);
+      padding: 5px 12px;
+      color: var(--muted);
+    }
+
+    /* skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .skill-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 14px 16px;
+    }
+    .skill-card .skill-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .skill-card .skill-val {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 6px 0 24px;
+    }
+
+    /* ── bottom download banner ── */
+    .dl-banner {
+      width: 100%;
+      background: var(--ink);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 28px 24px;
+      flex-wrap: wrap;
+    }
+    .dl-banner p {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .dl-banner a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .dl-banner a:hover { opacity: .85; }
+  </style>
+</head>
+<body>
+
+<!-- sticky header -->
+<header>
+  <span class="logo">Jack Feen</span>
+  <a class="dl-btn" href="Jack_Feen_Resume.pdf" download="Jack_Feen_Resume.pdf">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 1v8M4 6l3 3 3-3"/><path d="M1 10v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1"/>
+    </svg>
+    Download PDF
+  </a>
+</header>
+
+<!-- resume content -->
+<main>
+
+  <div class="name-block">
+    <h1>Jack Feen</h1>
+    <p class="tagline">Business Analytics &amp; AI &nbsp;·&nbsp; Financial Analytics</p>
+  </div>
+
+  <div class="contact-row">
+    <a href="mailto:jaf5542@my.utexas.edu">jaf5542@my.utexas.edu</a>
+    <span>(512) 586-0523</span>
+    <a href="https://linkedin.com/in/jackafeen" target="_blank">linkedin.com/in/jackafeen</a>
+    <a href="https://jackfeen.github.io" target="_blank">jackfeen.github.io</a>
+    <span>Austin, TX</span>
+  </div>
+
+  <!-- Education -->
+  <section>
+    <p class="section-label">Education</p>
+    <hr class="divider" />
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">University of Texas at Austin – McCombs</span>
+        <span class="entry-date">May 2026</span>
+      </div>
+      <p class="entry-sub">MS, Business Analytics – Financial Analytics &nbsp;·&nbsp; GPA: 3.74</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">UT Dallas – Naveen Jindal School</span>
+        <span class="entry-date">May 2025</span>
+      </div>
+      <p class="entry-sub">BS, Business Analytics &amp; Artificial Intelligence &nbsp;·&nbsp; GPA: 3.94</p>
+      <ul>
+        <li>Summa Cum Laude · Ann and Jack Graves Foundation Scholarship · Academic Excellence Scholarship</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section>
+    <p class="section-label">Professional Experience</p>
+    <hr class="divider" />
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Vise – Investment Strategy Capstone</span>
+        <span class="entry-date">Jan 2026 – Present</span>
+      </div>
+      <p class="entry-sub">Austin, TX</p>
+      <ul>
+        <li>Built a rules-based portfolio rebalancing engine in Python with drift thresholds and tax-loss harvesting logic.</li>
+        <li>Developed a simulation and back-testing framework to evaluate rebalancing triggers and TLH effectiveness.</li>
+        <li>Created a Streamlit UI enabling advisors to simulate portfolios and visualize drift, returns, and TLH trades.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">EssilorLuxottica (Helix) – Business Analyst Intern</span>
+        <span class="entry-date">May – Aug 2025</span>
+      </div>
+      <p class="entry-sub">Austin, TX</p>
+      <ul>
+        <li>Developed an employee bandwidth assessment framework enabling a 15% increase in customer volume.</li>
+        <li>Designed a SQL database tracking 10,000+ records of accounts receivable, aging goals, and ticket benchmarks.</li>
+        <li>Created HubSpot/Excel dashboards reporting account KPIs for Revenue Cycle Management directors.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Society of Sustainable Business – Founder/President</span>
+        <span class="entry-date">Oct 2023 – May 2025</span>
+      </div>
+      <p class="entry-sub">Dallas, TX</p>
+      <ul>
+        <li>Secured $5,000+ in sponsorships to launch impactEarth, UTD's first sustainability entrepreneurship competition.</li>
+        <li>Engaged 400+ students in volunteering initiatives and speaker series.</li>
+        <li>Directed rebranding and growth, overseeing a 7-officer board and 50+ members.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Lennox International – eCommerce Analyst Intern</span>
+        <span class="entry-date">Jun – Aug 2024</span>
+      </div>
+      <p class="entry-sub">Dallas, TX</p>
+      <ul>
+        <li>Pinpointed data pipeline failures between SAP ECC and Hybris, directing restoration affecting 10,000+ products.</li>
+        <li>Reduced clearance center update process time by 75% via VBA Excel automations and reworked SOPs.</li>
+        <li>Established and managed an Amazon Brand Registry account, removing counterfeit product listings.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section>
+    <p class="section-label">Projects</p>
+    <hr class="divider" />
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Connect 4 AI</span>
+        <span class="entry-date">Jan – Feb 2026</span>
+      </div>
+      <ul>
+        <li>Engineered a Connect 4 AI by generating 1M game positions via Monte Carlo Tree Search to train a CNN and Transformer (Python/TensorFlow).</li>
+        <li>Dockerized and deployed a front-end interface on AWS Lightsail for users to play against the trained model.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Dwelling – Apartment Recommendation Engine</span>
+        <span class="entry-date">Oct – Dec 2025</span>
+      </div>
+      <ul>
+        <li>Built an apartment search engine querying neighborhood sentiment and nearby features, using Google Maps API and scraped Reddit/Apartments.com data with word embeddings.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">News Sentiment for Stock Portfolio Optimization</span>
+        <span class="entry-date">Oct – Dec 2025</span>
+      </div>
+      <ul>
+        <li>Developed a classifier predicting portfolio strategy superiority (+12% returns, −10% volatility vs. MVO).</li>
+        <li>Built a pipeline with Pandas, NumPy, and VADER NLP processing 1.4M news articles and 13M return records.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Technical Skills -->
+  <section>
+    <p class="section-label">Technical Skills</p>
+    <hr class="divider" />
+    <div class="skills-grid">
+      <div class="skill-card">
+        <p class="skill-cat">Languages</p>
+        <p class="skill-val">Python, R, Java, SQL, Excel</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Libraries</p>
+        <p class="skill-val">Pandas, NumPy, PyTorch, TensorFlow</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Platforms</p>
+        <p class="skill-val">Snowflake, SAP, HubSpot, Hadoop, Tableau, Cognos, Azure DevOps</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Certifications</p>
+        <p class="skill-val">Advanced ML, Big Data, Optimization, IBM Professional Data Science</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honors -->
+  <section>
+    <p class="section-label">Honors</p>
+    <hr class="divider" />
+    <div class="honors-list">
+      <span class="honor-tag">National Collegiate Consulting Championship – 2nd</span>
+      <span class="honor-tag">Dean's Cup – 1st</span>
+      <span class="honor-tag">President's Volunteer Service Award</span>
+    </div>
+  </section>
+
+</main>
+
+<!-- bottom download banner -->
+<div class="dl-banner">
+  <p>Download the original PDF</p>
+  <a href="Jack_Feen_Resume.pdf" download="Jack_Feen_Resume.pdf">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 1v8M4 6l3 3 3-3"/><path d="M1 10v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1"/>
+    </svg>
+    Jack_Feen_Resume.pdf
+  </a>
+</div>
+
+</body>
+</html>
